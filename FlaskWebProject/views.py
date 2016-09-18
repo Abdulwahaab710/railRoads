@@ -4,6 +4,7 @@ Routes and views for the flask application.
 
 from datetime import datetime
 from flask import render_template, Flask, request
+import sqlite3
 # import db
 from FlaskWebProject import app
 
@@ -22,7 +23,13 @@ def about():
 
 @app.route('/survey')
 def survey():
-    return render_template('survey.html', questions=db.fetchQuestion())
+    conn = sqlite3.connect('dataBase.db')
+    result = []
+    c = conn.cursor()
+    c.execute('SELECT * FROM questions')
+    for row in c:
+        result.append(row)
+    return render_template('survey.html', questions=result)
 
 @app.route('/submitQuestionnaire', methods=['GET', 'POST'])
 def submitQuestionnaire():
