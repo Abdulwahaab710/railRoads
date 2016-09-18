@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h2>Based on your decisions:</h2>
+<br>
+<ul>
+    <li>Your expected satisfaction with academics is {{ score[0] }}/10</li>
+    <li>Your expected satisfaction with social life is {{ score[1] }}/10</li>
+    <li>Your expected satisfaction with extracurricular involvement is {{ score[2] }}/10</li>
+    <li>Your expected satisfaction with mental well-being is {{ score[3] }}/10</li>
+</ul>
+{% endblock %}
