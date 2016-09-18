@@ -27,7 +27,7 @@ def survey():
 @app.route('/submitQuestionnaire', methods=['GET', 'POST'])
 def submitQuestionnaire():
     if request.method == 'POST':
-        return str( [ int(v) for v in request.form.values()  ] )
+        return str( [ v for v in request.form.values()  ] )
 
 @app.route('/requests/<q>', methods=['GET', 'POST'])
 def req(q):
