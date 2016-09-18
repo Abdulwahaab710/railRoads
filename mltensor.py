@@ -24,8 +24,6 @@ import random
 import zipfile
 import numpy as np
 from six.moves import urllib
-import numpy as np
-from six.moves import urllib
 from six.moves import xrange # pylint: disable=redefined-builtin
 import tensorflow as tf
 
