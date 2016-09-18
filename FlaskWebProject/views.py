@@ -3,7 +3,8 @@ Routes and views for the flask application.
 """
 
 from datetime import datetime
-from flask import render_template, Flask
+from flask import render_template, Flask, request
+import db
 from FlaskWebProject import app
 
 @app.route('/')
@@ -21,8 +22,13 @@ def about():
 
 @app.route('/survey')
 def survey():
-    return render_template('survey.html')
+    return render_template('survey.html', questions=db.fetchQuestion())
 
-@app.route('/requests/<request>', methods=['GET', 'POST'])
-def request(request):
-    return 'hello world ' + request
+@app.route('/submitQuestionnaire', methods=['GET', 'POST'])
+def submitQuestionnaire():
+    if request.method == 'POST':
+        return str( [ int(v) for v in request.form.values()  ] )
+
+@app.route('/requests/<q>', methods=['GET', 'POST'])
+def req(q):
+    return 'hello world ' + q
