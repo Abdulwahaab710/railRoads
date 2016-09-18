@@ -1,20 +1,25 @@
 {% extends "layout.html" %}
-
+<style>
+label{
+    font-size: 1.4em !important;
+}
+</style>
 {% block content %}
-
-<h2>{{ title }}.</h2>
-<h3>{{ message }}</h3>
-
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
-
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
-
+    <form action="{{ url_for('submitQuestionnaire') }}" method="POST">
+        {% for question in questions %}
+            <div class="questions" id="q{{ question[0] }}">
+                {% set index = loop.index %}
+                <h4>{{ question[1] }}</h4>
+                {% for choice in range(2, question|length) if question[choice] is not none%}
+                    <p>
+                    <input name="question[{{ index }}]" type="radio" id="question{{ index }}-choice{{ choice-1 }}" class="orange accent-3" value="{{ loop.index0 }}" {# {% if loop.index0 == 0 %}required{% endif %}#}>
+                    <label for="question{{ index }}-choice{{ choice-1 }}">{{ question[choice] }}</label>
+                    </p>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+            <i class="material-icons right">send</i>
+        </button>
+    </form>
 {% endblock %}
